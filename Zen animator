@@ -1,0 +1,1334 @@
+function n(title, text)
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = title;Text = text;})
+end
+
+gID = nil
+
+function animator()
+--[[
+_G.MainColor
+_G.SecondaryColor
+_G.TertiaryColor
+_G.ArrowColor
+_G.MainTextColor
+_G.PointerColor
+_G.ButtonTextColor
+_G.SliderColor
+_G.ButtonColor
+_G.ToggleColor
+_G.DraggerCircleColor
+]]
+
+colorR = 255
+colorG = 50
+colorB = 120
+
+_G.MainTextColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.TertiaryColor = Color3.fromRGB(30,30,30)
+_G.PointerColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ButtonTextColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ButtonColor = Color3.fromRGB(0,0,0)
+_G.SliderColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.DraggerCircleColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ToggleColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ArrowColor = Color3.fromRGB(colorR,colorG,colorB)
+
+rlerp = {
+px = 0,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+rarmlerp = {
+px = -1.5,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+larmlerp = {
+px = 1.5,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+rleglerp = {
+px = -0.5,
+py = 2,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+lleglerp = {
+px = 0.5,
+py = 2,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+aspeed = 1
+
+function copy()
+qe = [[
+loadstring(game:HttpGet(https://hastebin.com/raw/kahuculete.md))()
+
+local Player=game.Players.LocalPlayer local Character=workspace[Player.Name]['Dummy'] local hum = Character.Humanoid local LeftArm=Character["Left Arm"] local LeftLeg=Character["Left Leg"] local RightArm=Character["Right Arm"] local RightLeg=Character["Right Leg"] local Root=Character["HumanoidRootPart"] local Head=Character["Head"] local Torso=Character["Torso"] local Neck=Torso["Neck"] local mouse = Player:GetMouse() local position = nil local sine = 0 local t = 0 local change = 1
+
+local HEADLERP = Instance.new("ManualWeld")
+HEADLERP.Parent = Head
+HEADLERP.Part0 = Head
+HEADLERP.Part1 = Head
+HEADLERP.C0 = CFrame.new(0, -1.5, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local TORSOLERP = Instance.new("ManualWeld")
+TORSOLERP.Parent = Root
+TORSOLERP.Part0 = Torso
+TORSOLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local ROOTLERP = Instance.new("ManualWeld")
+ROOTLERP.Parent = Root
+ROOTLERP.Part0 = Root
+ROOTLERP.Part1 = Torso
+ROOTLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTARMLERP = Instance.new("ManualWeld")
+RIGHTARMLERP.Parent = RightArm
+RIGHTARMLERP.Part0 = RightArm
+RIGHTARMLERP.Part1 = Torso
+RIGHTARMLERP.C0 = CFrame.new(-1.5, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTARMLERP = Instance.new("ManualWeld")
+LEFTARMLERP.Parent = LeftArm
+LEFTARMLERP.Part0 = LeftArm
+LEFTARMLERP.Part1 = Torso
+LEFTARMLERP.C0 = CFrame.new(1.5, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTLEGLERP = Instance.new("ManualWeld")
+RIGHTLEGLERP.Parent = RightLeg
+RIGHTLEGLERP.Part0 = RightLeg
+RIGHTLEGLERP.Part1 = Torso
+RIGHTLEGLERP.C0 = CFrame.new(-0.5, 2, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTLEGLERP = Instance.new("ManualWeld")
+LEFTLEGLERP.Parent = LeftLeg
+LEFTLEGLERP.Part0 = LeftLeg
+LEFTLEGLERP.Part1 = Torso
+LEFTLEGLERP.C0 = CFrame.new(0.5, 2, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+
+function swait(num)
+	if num == 0 or num == nil then
+		game:service("RunService").Stepped:wait(0)
+	else
+		for i = 0, num do
+			game:service("RunService").Stepped:wait(0)
+		end
+	end
+end
+
+position = "edit"
+
+coroutine.wrap(function()
+while true do
+sine = sine + change
+if position == "edit" then
+]]
+
+e = "change = "..aspeed
+
+setclipboard(""..qe..""..e.."\nROOTLERP.C0 = ROOTLERP.C0:lerp(CFrame.new("..rlerp.px.." + "..rlerp.lpx.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.py.." + "..rlerp.lpy.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.pz.." + "..rlerp.lpz.." * math.sin(sine/"..rlerp.speed..")) * CFrame.Angles(math.rad("..rlerp.rx.." + "..rlerp.lrx.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.ry.." + "..rlerp.lry.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.rz.." + "..rlerp.lrz.." * math.sin(sine/"..rlerp.speed.."))),"..rlerp.s..")\nRIGHTARMLERP.C0 = RIGHTARMLERP.C0:lerp(CFrame.new("..rarmlerp.px.." + "..rarmlerp.lpx.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.py.." + "..rarmlerp.lpy.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.pz.." + "..rarmlerp.lpz.." * math.sin(sine/"..rarmlerp.speed..")) * CFrame.Angles(math.rad("..rarmlerp.rx.." + "..rarmlerp.lrx.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.ry.." + "..rarmlerp.lry.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.rz.." + "..rarmlerp.lrz.." * math.sin(sine/"..rarmlerp.speed.."))),"..rarmlerp.s..")\nLEFTARMLERP.C0 = LEFTARMLERP.C0:lerp(CFrame.new("..larmlerp.px.." + "..larmlerp.lpx.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.py.." + "..larmlerp.lpy.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.pz.." + "..larmlerp.lpz.." * math.sin(sine/"..larmlerp.speed..")) * CFrame.Angles(math.rad("..larmlerp.rx.." + "..larmlerp.lrx.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.ry.." + "..larmlerp.lry.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.rz.." + "..larmlerp.lrz.." * math.sin(sine/"..larmlerp.speed.."))),"..larmlerp.s..")\nRIGHTLEGLERP.C0 = RIGHTLEGLERP.C0:lerp(CFrame.new("..rleglerp.px.." + "..rleglerp.lpx.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.py.." + "..rleglerp.lpy.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.pz.." + "..rleglerp.lpz.." * math.sin(sine/"..rleglerp.speed..")) * CFrame.Angles(math.rad("..rleglerp.rx.." + "..rleglerp.lrx.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.ry.." + "..rleglerp.lry.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.rz.." + "..rleglerp.lrz.." * math.sin(sine/"..rleglerp.speed.."))),"..rleglerp.s..")\nLEFTLEGLERP.C0 = LEFTLEGLERP.C0:lerp(CFrame.new("..lleglerp.px.." + "..lleglerp.lpx.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.py.." + "..lleglerp.lpy.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.pz.." + "..lleglerp.lpz.." * math.sin(sine/"..lleglerp.speed..")) * CFrame.Angles(math.rad("..lleglerp.rx.." + "..lleglerp.lrx.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.ry.." + "..lleglerp.lry.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.rz.." + "..lleglerp.lrz.." * math.sin(sine/"..lleglerp.speed.."))),"..lleglerp.s..")\nend\nswait()\nend\nend)()\n--Converted using Xen Imator")
+end
+
+function botcopy()
+botte = [[
+loadstring(game:HttpGet(https://hastebin.com/raw/otoqenihol.md))()
+
+local Player=game.Players.LocalPlayer local Character=workspace[Player.Name]['Dummy'] local hum = Character.Humanoid local LeftArm=Character["Left Arm"] local LeftLeg=Character["Left Leg"] local RightArm=Character["Right Arm"] local RightLeg=Character["Right Leg"] local Root=Character["HumanoidRootPart"] local Head=Character["Head"] local Torso=Character["Torso"] local Neck=Torso["Neck"] local mouse = Player:GetMouse() local position = nil local sine = 0 local t = 0 local change = 1
+
+local HEADLERP = Instance.new("ManualWeld")
+HEADLERP.Parent = Head
+HEADLERP.Part0 = Head
+HEADLERP.Part1 = Head
+HEADLERP.C0 = CFrame.new(0, -1.5, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local TORSOLERP = Instance.new("ManualWeld")
+TORSOLERP.Parent = Root
+TORSOLERP.Part0 = Torso
+TORSOLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local ROOTLERP = Instance.new("ManualWeld")
+ROOTLERP.Parent = Root
+ROOTLERP.Part0 = Root
+ROOTLERP.Part1 = Torso
+ROOTLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTARMLERP = Instance.new("ManualWeld")
+RIGHTARMLERP.Parent = RightArm
+RIGHTARMLERP.Part0 = RightArm
+RIGHTARMLERP.Part1 = Torso
+RIGHTARMLERP.C0 = CFrame.new(-1.5, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTARMLERP = Instance.new("ManualWeld")
+LEFTARMLERP.Parent = LeftArm
+LEFTARMLERP.Part0 = LeftArm
+LEFTARMLERP.Part1 = Torso
+LEFTARMLERP.C0 = CFrame.new(1.5, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTLEGLERP = Instance.new("ManualWeld")
+RIGHTLEGLERP.Parent = RightLeg
+RIGHTLEGLERP.Part0 = RightLeg
+RIGHTLEGLERP.Part1 = Torso
+RIGHTLEGLERP.C0 = CFrame.new(-0.5, 2, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTLEGLERP = Instance.new("ManualWeld")
+LEFTLEGLERP.Parent = LeftLeg
+LEFTLEGLERP.Part0 = LeftLeg
+LEFTLEGLERP.Part1 = Torso
+LEFTLEGLERP.C0 = CFrame.new(0.5, 2, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+
+function swait(num)
+	if num == 0 or num == nil then
+		game:service("RunService").Stepped:wait(0)
+	else
+		for i = 0, num do
+			game:service("RunService").Stepped:wait(0)
+		end
+	end
+end
+
+position = "edit"
+
+coroutine.wrap(function()
+while true do
+sine = sine + change
+if position == "edit" then
+]]
+setclipboard(""..botte..""..e.."\nROOTLERP.C0 = ROOTLERP.C0:lerp(CFrame.new("..rlerp.px.." + "..rlerp.lpx.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.py.." + "..rlerp.lpy.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.pz.." + "..rlerp.lpz.." * math.sin(sine/"..rlerp.speed..")) * CFrame.Angles(math.rad("..rlerp.rx.." + "..rlerp.lrx.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.ry.." + "..rlerp.lry.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.rz.." + "..rlerp.lrz.." * math.sin(sine/"..rlerp.speed.."))),"..rlerp.s..")\nRIGHTARMLERP.C0 = RIGHTARMLERP.C0:lerp(CFrame.new("..rarmlerp.px.." + "..rarmlerp.lpx.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.py.." + "..rarmlerp.lpy.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.pz.." + "..rarmlerp.lpz.." * math.sin(sine/"..rarmlerp.speed..")) * CFrame.Angles(math.rad("..rarmlerp.rx.." + "..rarmlerp.lrx.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.ry.." + "..rarmlerp.lry.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.rz.." + "..rarmlerp.lrz.." * math.sin(sine/"..rarmlerp.speed.."))),"..rarmlerp.s..")\nLEFTARMLERP.C0 = LEFTARMLERP.C0:lerp(CFrame.new("..larmlerp.px.." + "..larmlerp.lpx.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.py.." + "..larmlerp.lpy.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.pz.." + "..larmlerp.lpz.." * math.sin(sine/"..larmlerp.speed..")) * CFrame.Angles(math.rad("..larmlerp.rx.." + "..larmlerp.lrx.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.ry.." + "..larmlerp.lry.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.rz.." + "..larmlerp.lrz.." * math.sin(sine/"..larmlerp.speed.."))),"..larmlerp.s..")\nRIGHTLEGLERP.C0 = RIGHTLEGLERP.C0:lerp(CFrame.new("..rleglerp.px.." + "..rleglerp.lpx.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.py.." + "..rleglerp.lpy.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.pz.." + "..rleglerp.lpz.." * math.sin(sine/"..rleglerp.speed..")) * CFrame.Angles(math.rad("..rleglerp.rx.." + "..rleglerp.lrx.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.ry.." + "..rleglerp.lry.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.rz.." + "..rleglerp.lrz.." * math.sin(sine/"..rleglerp.speed.."))),"..rleglerp.s..")\nLEFTLEGLERP.C0 = LEFTLEGLERP.C0:lerp(CFrame.new("..lleglerp.px.." + "..lleglerp.lpx.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.py.." + "..lleglerp.lpy.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.pz.." + "..lleglerp.lpz.." * math.sin(sine/"..lleglerp.speed..")) * CFrame.Angles(math.rad("..lleglerp.rx.." + "..lleglerp.lrx.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.ry.." + "..lleglerp.lry.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.rz.." + "..lleglerp.lrz.." * math.sin(sine/"..lleglerp.speed.."))),"..lleglerp.s..")\nend\nswait()\nend\nend)()\n--Converted using Xen Imator")
+end
+
+function copyclerps()
+cpyspeed = "change = "..aspeed
+clerpanimate=""..cpyspeed.."\nROOTLERP.C0 = ROOTLERP.C0:lerp(CFrame.new("..rlerp.px.." + "..rlerp.lpx.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.py.." + "..rlerp.lpy.." * math.sin(sine/"..rlerp.speed.."), "..rlerp.pz.." + "..rlerp.lpz.." * math.sin(sine/"..rlerp.speed..")) * CFrame.Angles(math.rad("..rlerp.rx.." + "..rlerp.lrx.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.ry.." + "..rlerp.lry.." * math.sin(sine/"..rlerp.speed..")), math.rad("..rlerp.rz.." + "..rlerp.lrz.." * math.sin(sine/"..rlerp.speed.."))),"..rlerp.s..")\nRIGHTARMLERP.C0 = RIGHTARMLERP.C0:lerp(CFrame.new("..rarmlerp.px.." + "..rarmlerp.lpx.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.py.." + "..rarmlerp.lpy.." * math.sin(sine/"..rarmlerp.speed.."), "..rarmlerp.pz.." + "..rarmlerp.lpz.." * math.sin(sine/"..rarmlerp.speed..")) * CFrame.Angles(math.rad("..rarmlerp.rx.." + "..rarmlerp.lrx.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.ry.." + "..rarmlerp.lry.." * math.sin(sine/"..rarmlerp.speed..")), math.rad("..rarmlerp.rz.." + "..rarmlerp.lrz.." * math.sin(sine/"..rarmlerp.speed.."))),"..rarmlerp.s..")\nLEFTARMLERP.C0 = LEFTARMLERP.C0:lerp(CFrame.new("..larmlerp.px.." + "..larmlerp.lpx.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.py.." + "..larmlerp.lpy.." * math.sin(sine/"..larmlerp.speed.."), "..larmlerp.pz.." + "..larmlerp.lpz.." * math.sin(sine/"..larmlerp.speed..")) * CFrame.Angles(math.rad("..larmlerp.rx.." + "..larmlerp.lrx.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.ry.." + "..larmlerp.lry.." * math.sin(sine/"..larmlerp.speed..")), math.rad("..larmlerp.rz.." + "..larmlerp.lrz.." * math.sin(sine/"..larmlerp.speed.."))),"..larmlerp.s..")\nRIGHTLEGLERP.C0 = RIGHTLEGLERP.C0:lerp(CFrame.new("..rleglerp.px.." + "..rleglerp.lpx.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.py.." + "..rleglerp.lpy.." * math.sin(sine/"..rleglerp.speed.."), "..rleglerp.pz.." + "..rleglerp.lpz.." * math.sin(sine/"..rleglerp.speed..")) * CFrame.Angles(math.rad("..rleglerp.rx.." + "..rleglerp.lrx.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.ry.." + "..rleglerp.lry.." * math.sin(sine/"..rleglerp.speed..")), math.rad("..rleglerp.rz.." + "..rleglerp.lrz.." * math.sin(sine/"..rleglerp.speed.."))),"..rleglerp.s..")\nLEFTLEGLERP.C0 = LEFTLEGLERP.C0:lerp(CFrame.new("..lleglerp.px.." + "..lleglerp.lpx.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.py.." + "..lleglerp.lpy.." * math.sin(sine/"..lleglerp.speed.."), "..lleglerp.pz.." + "..lleglerp.lpz.." * math.sin(sine/"..lleglerp.speed..")) * CFrame.Angles(math.rad("..lleglerp.rx.." + "..lleglerp.lrx.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.ry.." + "..lleglerp.lry.." * math.sin(sine/"..lleglerp.speed..")), math.rad("..lleglerp.rz.." + "..lleglerp.lrz.." * math.sin(sine/"..lleglerp.speed.."))),"..lleglerp.s..")"
+setclipboard(clerpanimate)
+end
+
+_G.reanimatednow = false
+
+function botreanim()
+sethiddenproperty(game.Players.LocalPlayer,"MaximumSimulationRadius",math.huge)
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",9e99)
+
+for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+if v:IsA("BasePart") and v.Name == 'Handle' then 
+game:GetService("RunService").Heartbeat:connect(function()
+v.Velocity = Vector3.new(0,-30,0)
+wait(.5)
+end)
+end
+end
+
+local mainmainchar = workspace[game.Players.LocalPlayer.Name]
+mainmainchar.Archivable = true
+
+local fakemainmainchar = mainmainchar:Clone()
+fakemainmainchar.Parent = mainmainchar
+fakemainmainchar.Head.face.Transparency = 1
+workspace.CurrentCamera.CameraSubject = fakemainmainchar.Humanoid
+
+local conne = {}
+
+function create(part, parent, p, r)
+part.AccessoryWeld:Remove()
+Instance.new("Attachment",part)
+Instance.new("AlignPosition",part)
+Instance.new("AlignOrientation",part)
+Instance.new("Attachment",parent)
+part.AlignPosition.Attachment0 = part.Attachment
+part.AlignOrientation.Attachment0 = part.Attachment
+part.AlignPosition.Attachment1 = parent.Attachment
+part.AlignOrientation.Attachment1 = parent.Attachment
+part.Attachment.Position = p
+part.Attachment.Orientation = r
+part.AlignPosition.MaxForce = 9999999
+part.AlignPosition.MaxVelocity = math.huge
+part.AlignPosition.ReactionForceEnabled = false
+part.AlignPosition.Responsiveness = math.huge
+part.AlignOrientation.Responsiveness = 200
+part.AlignPosition.RigidityEnabled = false
+part.AlignOrientation.MaxTorque = 9999999
+end
+
+local hats = {
+Head = mainmainchar:FindFirstChild('Hollow').Handle,
+Torso = mainmainchar:FindFirstChild('SeeMonkey').Handle,
+LeftArm = mainmainchar:FindFirstChild('Pink Hair').Handle,
+RightArm = mainmainchar:FindFirstChild('Pal Hair').Handle,
+LeftLeg = mainmainchar:FindFirstChild('Kate Hair').Handle,
+RightLeg = mainmainchar:FindFirstChild('LavanderHair').Handle
+}
+
+function rmesh(HatName)
+for _,mesh in next, workspace[game.Players.LocalPlayer.Name][HatName]:GetDescendants() do
+if mesh:IsA("Mesh") or mesh:IsA("SpecialMesh") then
+mesh:Remove()
+end
+end
+end
+
+table.insert(conne, game:GetService('RunService').Stepped:Connect(function()
+fakemainmainchar.Torso.CanCollide = false
+fakemainmainchar.Head.CanCollide = false
+end))
+
+create(hats.Head, fakemainmainchar['Head'], Vector3.new(), Vector3.new())
+create(hats.Torso, fakemainmainchar['Torso'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.LeftArm, fakemainmainchar['Left Arm'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.RightArm, fakemainmainchar['Right Arm'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.LeftLeg, fakemainmainchar['Left Leg'], Vector3.new(), Vector3.new(90,0,0))
+create(hats.RightLeg, fakemainmainchar['Right Leg'], Vector3.new(), Vector3.new(90,0,0))
+
+rmesh('SeeMonkey')
+rmesh('Pink Hair')
+rmesh('Pal Hair')
+rmesh('Kate Hair')
+rmesh('LavanderHair')
+
+for i,v in next, fakemainmainchar:GetDescendants() do
+if v:IsA("BasePart") then
+v.Transparency = 1
+end
+end
+
+fakemainmainchar.Humanoid.Died:Connect(function()
+   game.Players.LocalPlayer.Character = mainmainchar
+   workspace.CurrentCamera.CameraSubject = mainmainchar.Humanoid
+   mainmainchar:BreakJoints()
+   fakemainmainchar:Destroy()
+
+   for _,v in pairs(conne) do v:Disconnect() end
+end)
+mainmainchar.Humanoid.Died:Connect(function()
+   game.Players.LocalPlayer.Character = mainmainchar
+   workspace.CurrentCamera.CameraSubject = mainmainchar.Humanoid
+   mainmainchar:BreakJoints()
+   fakemainmainchar:Destroy()
+
+   for _,v in pairs(conne) do v:Disconnect() end
+end)
+
+mainmainchar.Torso.Anchored = true
+
+game.Players.LocalPlayer.Character = fakemainmainchar
+
+local Player=game.Players.LocalPlayer
+local hum = fakemainmainchar.Humanoid
+local LeftArm=fakemainmainchar["Left Arm"]
+local LeftLeg=fakemainmainchar["Left Leg"]
+local RightArm=fakemainmainchar["Right Arm"]
+local RightLeg=fakemainmainchar["Right Leg"]
+local Root=fakemainmainchar["HumanoidRootPart"]
+local Head=fakemainmainchar["Head"]
+local Torso=fakemainmainchar["Torso"]
+local Neck=Torso["Neck"]
+local mouse = Player:GetMouse()
+local position = nil
+local MseGuide = true
+local sine = 0
+local t = 0
+local change = 1
+local settime = nil
+local RunSrv = game:GetService("RunService")
+local RenderStepped = game:GetService("RunService").RenderStepped
+local removeuseless = game:GetService("Debris")
+
+local HEADLERP = Instance.new("ManualWeld")
+HEADLERP.Parent = Head
+HEADLERP.Part0 = Head
+HEADLERP.Part1 = Head
+HEADLERP.C0 = CFrame.new(0, -1.5, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local TORSOLERP = Instance.new("ManualWeld")
+TORSOLERP.Parent = Root
+TORSOLERP.Part0 = Torso
+TORSOLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local ROOTLERP = Instance.new("ManualWeld")
+ROOTLERP.Parent = Root
+ROOTLERP.Part0 = Root
+ROOTLERP.Part1 = Torso
+ROOTLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTARMLERP = Instance.new("ManualWeld")
+RIGHTARMLERP.Parent = RightArm
+RIGHTARMLERP.Part0 = RightArm
+RIGHTARMLERP.Part1 = Torso
+RIGHTARMLERP.C0 = CFrame.new(0, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTARMLERP = Instance.new("ManualWeld")
+LEFTARMLERP.Parent = LeftArm
+LEFTARMLERP.Part0 = LeftArm
+LEFTARMLERP.Part1 = Torso
+LEFTARMLERP.C0 = CFrame.new(0, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTLEGLERP = Instance.new("ManualWeld")
+RIGHTLEGLERP.Parent = RightLeg
+RIGHTLEGLERP.Part0 = RightLeg
+RIGHTLEGLERP.Part1 = Torso
+RIGHTLEGLERP.C0 = CFrame.new(0, 1, 0.5) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTLEGLERP = Instance.new("ManualWeld")
+LEFTLEGLERP.Parent = LeftLeg
+LEFTLEGLERP.Part0 = LeftLeg
+LEFTLEGLERP.Part1 = Torso
+LEFTLEGLERP.C0 = CFrame.new(0, 1, 0.5) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+
+function swait(num)
+	if num == 0 or num == nil then
+		game:service("RunService").Stepped:wait(0)
+	else
+		for i = 0, num do
+			game:service("RunService").Stepped:wait(0)
+		end
+	end
+end
+
+position = "edit"
+
+coroutine.wrap(function()
+while true do
+sine = sine + change
+if position == "edit" then
+change = aspeed
+ROOTLERP.C0 = ROOTLERP.C0:lerp(CFrame.new(rlerp.px + rlerp.lpx * math.sin(sine/rlerp.speed), rlerp.py + rlerp.lpy * math.sin(sine/rlerp.speed), rlerp.pz + rlerp.lpz * math.sin(sine/rlerp.speed)) * CFrame.Angles(math.rad(rlerp.rx + rlerp.lrx * math.sin(sine/rlerp.speed)), math.rad(rlerp.ry + rlerp.lry * math.sin(sine/rlerp.speed)), math.rad(rlerp.rz + rlerp.lrz * math.sin(sine/rlerp.speed))),rlerp.s)
+RIGHTARMLERP.C0 = RIGHTARMLERP.C0:lerp(CFrame.new(rarmlerp.px + rarmlerp.lpx * math.sin(sine/rarmlerp.speed), rarmlerp.py + rarmlerp.lpy * math.sin(sine/rarmlerp.speed), rarmlerp.pz + rarmlerp.lpz * math.sin(sine/rarmlerp.speed)) * CFrame.Angles(math.rad(rarmlerp.rx + rarmlerp.lrx * math.sin(sine/rarmlerp.speed)), math.rad(rarmlerp.ry + rarmlerp.lry * math.sin(sine/rarmlerp.speed)), math.rad(rarmlerp.rz + rarmlerp.lrz * math.sin(sine/rarmlerp.speed))),rarmlerp.s)
+LEFTARMLERP.C0 = LEFTARMLERP.C0:lerp(CFrame.new(larmlerp.px + larmlerp.lpx * math.sin(sine/larmlerp.speed), larmlerp.py + larmlerp.lpy * math.sin(sine/larmlerp.speed), larmlerp.pz + larmlerp.lpz * math.sin(sine/larmlerp.speed)) * CFrame.Angles(math.rad(larmlerp.rx + larmlerp.lrx * math.sin(sine/larmlerp.speed)), math.rad(larmlerp.ry + larmlerp.lry * math.sin(sine/larmlerp.speed)), math.rad(larmlerp.rz + larmlerp.lrz * math.sin(sine/larmlerp.speed))),larmlerp.s)
+RIGHTLEGLERP.C0 = RIGHTLEGLERP.C0:lerp(CFrame.new(rleglerp.px + rleglerp.lpx * math.sin(sine/rleglerp.speed), rleglerp.py + rleglerp.lpy * math.sin(sine/rleglerp.speed), rleglerp.pz + rleglerp.lpz * math.sin(sine/rleglerp.speed)) * CFrame.Angles(math.rad(rleglerp.rx + rleglerp.lrx * math.sin(sine/rleglerp.speed)), math.rad(rleglerp.ry + rleglerp.lry * math.sin(sine/rleglerp.speed)), math.rad(rleglerp.rz + rleglerp.lrz * math.sin(sine/rleglerp.speed))),rleglerp.s)
+LEFTLEGLERP.C0 = LEFTLEGLERP.C0:lerp(CFrame.new(lleglerp.px + lleglerp.lpx * math.sin(sine/lleglerp.speed), lleglerp.py + lleglerp.lpy * math.sin(sine/lleglerp.speed), lleglerp.pz + lleglerp.lpz * math.sin(sine/lleglerp.speed)) * CFrame.Angles(math.rad(lleglerp.rx + lleglerp.lrx * math.sin(sine/lleglerp.speed)), math.rad(lleglerp.ry + lleglerp.lry * math.sin(sine/lleglerp.speed)), math.rad(lleglerp.rz + lleglerp.lrz * math.sin(sine/lleglerp.speed))),lleglerp.s)
+end
+swait()
+end
+end)()
+end
+
+function reanimateplr()
+if _G.reanimatednow then
+for i,v in next, workspace[game.Players.LocalPlayer.Name]:GetDescendants() do
+if v:IsA("BasePart") then
+game:GetService("RunService").Heartbeat:connect(function()
+v.Velocity = Vector3.new(0,-30,0)
+end)
+end
+end
+
+kill = false
+
+workspace[game.Players.LocalPlayer.Name].Animate.Disabled = true
+
+local connections = {}
+
+local rs = game:GetService("RunService")
+
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+
+spawn(function()
+while rs.Stepped:wait() and not kill do
+settings().Physics.AllowSleep = false
+
+sethiddenproperty(plr, "MaximumSimulationRadius", math.pow(math.huge,math.huge) * math.huge)
+sethiddenproperty(plr, "SimulationRadius", math.pow(math.huge,math.huge) * math.huge)
+sethiddenproperty(game.Players.LocalPlayer,"MaximumSimulationRadius",math.huge)
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",9e99)
+end
+end)
+
+char.Archivable = true
+local fakechar = char:Clone()
+fakechar.Name = "Dummy"
+fakechar.Parent = char
+fakechar.Head.face.Transparency = 1
+fakechar.Humanoid.DisplayDistanceType = "None"
+workspace.CurrentCamera.CameraSubject = fakechar.Humanoid
+
+char['Torso']['Left Shoulder']:Destroy()
+char['Torso']['Left Hip']:Destroy()
+char['Torso']['Right Shoulder']:Destroy()
+char['Torso']['Right Hip']:Destroy()
+char['HumanoidRootPart']['RootJoint']:Destroy()
+
+function Align(part, parent, position, rotation)
+Instance.new("Attachment",part)
+Instance.new("AlignPosition",part)
+Instance.new("AlignOrientation",part)
+Instance.new("Attachment",parent)
+part.AlignPosition.Attachment0 = part.Attachment
+part.AlignOrientation.Attachment0 = part.Attachment
+part.AlignPosition.Attachment1 = parent.Attachment
+part.AlignOrientation.Attachment1 = parent.Attachment
+part.Attachment.Position = position
+part.Attachment.Orientation = rotation
+part.AlignPosition.MaxForce = 9999999
+part.AlignPosition.MaxVelocity = math.huge
+part.AlignPosition.ReactionForceEnabled = false
+part.AlignPosition.Responsiveness = math.huge
+part.AlignOrientation.Responsiveness = 200
+part.AlignPosition.RigidityEnabled = false
+part.AlignOrientation.MaxTorque = 9999999
+end
+
+Align(char.Head, fakechar.Head, Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char.Torso, fakechar.Torso, Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char["Left Arm"], fakechar["Left Arm"], Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char["Right Arm"], fakechar["Right Arm"], Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char["Left Leg"], fakechar["Left Leg"], Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char["Right Leg"], fakechar["Right Leg"], Vector3.new(0,0,0), Vector3.new(0,0,0))
+Align(char["HumanoidRootPart"], fakechar["HumanoidRootPart"], Vector3.new(0,0,0), Vector3.new(0,0,0))
+
+table.insert(connections, rs.Stepped:Connect(function()
+fakechar:FindFirstChild("Head").CanCollide = false
+fakechar:FindFirstChild("Torso").CanCollide = false
+char.Head.CanCollide = false
+char.Torso.CanCollide = false
+end))
+
+for i,v in next, fakechar:GetDescendants() do
+if v:IsA("BasePart") and v.Transparency == 0 then
+v.Transparency = 1
+end
+end
+
+fakechar.Humanoid.Died:Connect(function()
+   plr.Character = char
+   char:BreakJoints()
+   fakechar:Destroy()
+   kill = true
+
+   for _,v in pairs(connections) do v:Disconnect() end
+end)
+
+char.Humanoid.Died:Connect(function()
+   plr.Character = char
+   char:BreakJoints()
+   fakechar:Destroy()
+   kill = true
+
+   for _,v in pairs(connections) do v:Disconnect() end
+end)
+
+plr.Character = fakechar
+ 
+local Player=game.Players.LocalPlayer
+local Character=workspace[Player.Name]['Dummy']
+local hum = Character.Humanoid
+local LeftArm=Character["Left Arm"]
+local LeftLeg=Character["Left Leg"]
+local RightArm=Character["Right Arm"]
+local RightLeg=Character["Right Leg"]
+local Root=Character["HumanoidRootPart"]
+local Head=Character["Head"]
+local Torso=Character["Torso"]
+local Neck=Torso["Neck"]
+local mouse = Player:GetMouse()
+local position = nil
+local MseGuide = true
+local sine = 0
+local t = 0
+local change = 1
+local settime = nil
+local RunSrv = game:GetService("RunService")
+local RenderStepped = game:GetService("RunService").RenderStepped
+local removeuseless = game:GetService("Debris")
+
+local HEADLERP = Instance.new("ManualWeld")
+HEADLERP.Parent = Head
+HEADLERP.Part0 = Head
+HEADLERP.Part1 = Head
+HEADLERP.C0 = CFrame.new(0, -1.5, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local TORSOLERP = Instance.new("ManualWeld")
+TORSOLERP.Parent = Root
+TORSOLERP.Part0 = Torso
+TORSOLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local ROOTLERP = Instance.new("ManualWeld")
+ROOTLERP.Parent = Root
+ROOTLERP.Part0 = Root
+ROOTLERP.Part1 = Torso
+ROOTLERP.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTARMLERP = Instance.new("ManualWeld")
+RIGHTARMLERP.Parent = RightArm
+RIGHTARMLERP.Part0 = RightArm
+RIGHTARMLERP.Part1 = Torso
+RIGHTARMLERP.C0 = CFrame.new(0, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTARMLERP = Instance.new("ManualWeld")
+LEFTARMLERP.Parent = LeftArm
+LEFTARMLERP.Part0 = LeftArm
+LEFTARMLERP.Part1 = Torso
+LEFTARMLERP.C0 = CFrame.new(0, 0, -0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local RIGHTLEGLERP = Instance.new("ManualWeld")
+RIGHTLEGLERP.Parent = RightLeg
+RIGHTLEGLERP.Part0 = RightLeg
+RIGHTLEGLERP.Part1 = Torso
+RIGHTLEGLERP.C0 = CFrame.new(0, 1, 0.5) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+ 
+local LEFTLEGLERP = Instance.new("ManualWeld")
+LEFTLEGLERP.Parent = LeftLeg
+LEFTLEGLERP.Part0 = LeftLeg
+LEFTLEGLERP.Part1 = Torso
+LEFTLEGLERP.C0 = CFrame.new(0, 1, 0.5) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+
+function swait(num)
+	if num == 0 or num == nil then
+		game:service("RunService").Stepped:wait(0)
+	else
+		for i = 0, num do
+			game:service("RunService").Stepped:wait(0)
+		end
+	end
+end
+
+position = "edit"
+
+coroutine.wrap(function()
+while true do
+sine = sine + change
+if position == "edit" then
+change = aspeed
+ROOTLERP.C0 = ROOTLERP.C0:lerp(CFrame.new(rlerp.px + rlerp.lpx * math.sin(sine/rlerp.speed), rlerp.py + rlerp.lpy * math.sin(sine/rlerp.speed), rlerp.pz + rlerp.lpz * math.sin(sine/rlerp.speed)) * CFrame.Angles(math.rad(rlerp.rx + rlerp.lrx * math.sin(sine/rlerp.speed)), math.rad(rlerp.ry + rlerp.lry * math.sin(sine/rlerp.speed)), math.rad(rlerp.rz + rlerp.lrz * math.sin(sine/rlerp.speed))),rlerp.s)
+RIGHTARMLERP.C0 = RIGHTARMLERP.C0:lerp(CFrame.new(rarmlerp.px + rarmlerp.lpx * math.sin(sine/rarmlerp.speed), rarmlerp.py + rarmlerp.lpy * math.sin(sine/rarmlerp.speed), rarmlerp.pz + rarmlerp.lpz * math.sin(sine/rarmlerp.speed)) * CFrame.Angles(math.rad(rarmlerp.rx + rarmlerp.lrx * math.sin(sine/rarmlerp.speed)), math.rad(rarmlerp.ry + rarmlerp.lry * math.sin(sine/rarmlerp.speed)), math.rad(rarmlerp.rz + rarmlerp.lrz * math.sin(sine/rarmlerp.speed))),rarmlerp.s)
+LEFTARMLERP.C0 = LEFTARMLERP.C0:lerp(CFrame.new(larmlerp.px + larmlerp.lpx * math.sin(sine/larmlerp.speed), larmlerp.py + larmlerp.lpy * math.sin(sine/larmlerp.speed), larmlerp.pz + larmlerp.lpz * math.sin(sine/larmlerp.speed)) * CFrame.Angles(math.rad(larmlerp.rx + larmlerp.lrx * math.sin(sine/larmlerp.speed)), math.rad(larmlerp.ry + larmlerp.lry * math.sin(sine/larmlerp.speed)), math.rad(larmlerp.rz + larmlerp.lrz * math.sin(sine/larmlerp.speed))),larmlerp.s)
+RIGHTLEGLERP.C0 = RIGHTLEGLERP.C0:lerp(CFrame.new(rleglerp.px + rleglerp.lpx * math.sin(sine/rleglerp.speed), rleglerp.py + rleglerp.lpy * math.sin(sine/rleglerp.speed), rleglerp.pz + rleglerp.lpz * math.sin(sine/rleglerp.speed)) * CFrame.Angles(math.rad(rleglerp.rx + rleglerp.lrx * math.sin(sine/rleglerp.speed)), math.rad(rleglerp.ry + rleglerp.lry * math.sin(sine/rleglerp.speed)), math.rad(rleglerp.rz + rleglerp.lrz * math.sin(sine/rleglerp.speed))),rleglerp.s)
+LEFTLEGLERP.C0 = LEFTLEGLERP.C0:lerp(CFrame.new(lleglerp.px + lleglerp.lpx * math.sin(sine/lleglerp.speed), lleglerp.py + lleglerp.lpy * math.sin(sine/lleglerp.speed), lleglerp.pz + lleglerp.lpz * math.sin(sine/lleglerp.speed)) * CFrame.Angles(math.rad(lleglerp.rx + lleglerp.lrx * math.sin(sine/lleglerp.speed)), math.rad(lleglerp.ry + lleglerp.lry * math.sin(sine/lleglerp.speed)), math.rad(lleglerp.rz + lleglerp.lrz * math.sin(sine/lleglerp.speed))),lleglerp.s)
+end
+swait()
+end
+end)()
+
+workspace.CurrentCamera.CameraSubject = Character.Humanoid
+end
+end
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+
+local anm = library:CreateWindow("Xen Animator")
+local aaaaaa = anm:CreateFolder("Leaked by NotLXRTT")
+local m = anm:CreateFolder("Main")
+local r = anm:CreateFolder("Torso")
+local ra = anm:CreateFolder("Right Arm")
+local la = anm:CreateFolder("Left Arm")
+local rl = anm:CreateFolder("Right Leg")
+local ll = anm:CreateFolder("Left Leg")
+local cpysec = anm:CreateFolder("Converter")
+
+m:Button("Reanimate",function()
+_G.reanimatednow = true
+if _G.reanimatednow then
+    reanimateplr()
+end
+end)
+
+m:Button("Reanimate (Bot)",function()
+botreanim()
+end)
+
+m:Button("Reset Animations",function()
+rlerp = {
+px = 0,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+rarmlerp = {
+px = -1.5,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+larmlerp = {
+px = 1.5,
+py = 0,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+rleglerp = {
+px = -0.5,
+py = 2,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+
+lleglerp = {
+px = 0.5,
+py = 2,
+pz = 0,
+rx = 0,
+ry = 0,
+rz = 0,
+lpx = 0,
+lpy = 0,
+lpz = 0,
+lrx = 0,
+lry = 0,
+lrz = 0,
+speed = 12,
+s = .1
+}
+end)
+
+cpysec:Button("Convert to Script",function()
+copy()
+end)
+
+cpysec:Button("Convert to Script [Bot]",function()
+botcopy()
+end)
+
+cpysec:Button("Copy Clerp",function()
+copyclerps()
+end)
+
+r:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.px = value
+end)
+
+r:Slider("Position X [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lpx = value
+end)
+
+r:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.py = value
+end)
+
+r:Slider("Position Y [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lpy = value
+end)
+
+r:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.pz = value
+end)
+
+r:Slider("Position Z [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lpz = value
+end)
+
+r:Label("Rotation",{
+    TextSize = 15; -- Self Explaining
+    TextColor = Color3.fromRGB(colorR,colorG,colorB); -- Self Explaining
+    BgColor = Color3.fromRGB(20,20,20); -- Self Explaining
+}) 
+
+
+r:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.rx = value
+end)
+
+r:Slider("Rotation X [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lrx = value
+end)
+
+r:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.ry = value
+end)
+
+r:Slider("Rotation Y [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lry = value
+end)
+
+r:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.rz = value
+end)
+
+r:Slider("Rotation Z [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rlerp.lrz = value
+end)
+
+ra:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.px = value
+end)
+
+ra:Slider("Position X [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lpx = value
+end)
+
+ra:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.py = value
+end)
+
+ra:Slider("Position Y [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lpy = value
+end)
+
+ra:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.pz = value
+end)
+
+ra:Slider("Position Z [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lpz = value
+end)
+
+ra:Label("Rotation",{
+    TextSize = 15; -- Self Explaining
+    TextColor = Color3.fromRGB(colorR,colorG,colorB); -- Self Explaining
+    BgColor = Color3.fromRGB(20,20,20); -- Self Explaining
+}) 
+
+
+ra:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.rx = value
+end)
+
+ra:Slider("Rotation X [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lrx = value
+end)
+
+ra:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.ry = value
+end)
+
+ra:Slider("Rotation Y [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lry = value
+end)
+
+ra:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.rz = value
+end)
+
+ra:Slider("Rotation Z [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rarmlerp.lrz = value
+end)
+
+la:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.px = value
+end)
+
+la:Slider("Position X [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lpx = value
+end)
+
+la:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.py = value
+end)
+
+la:Slider("Position Y [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lpy = value
+end)
+
+la:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.pz = value
+end)
+
+la:Slider("Position Z [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lpz = value
+end)
+
+la:Label("Rotation",{
+    TextSize = 15; -- Self Explaining
+    TextColor = Color3.fromRGB(colorR,colorG,colorB); -- Self Explaining
+    BgColor = Color3.fromRGB(20,20,20); -- Self Explaining
+}) 
+
+
+la:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.rx = value
+end)
+
+la:Slider("Rotation X [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lrx = value
+end)
+
+la:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.ry = value
+end)
+
+la:Slider("Rotation Y [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lry = value
+end)
+
+la:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.rz = value
+end)
+
+la:Slider("Rotation Z [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    larmlerp.lrz = value
+end) 
+
+rl:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.px = value
+end)
+
+rl:Slider("Position X [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lpx = value
+end)
+
+rl:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.py = value
+end)
+
+rl:Slider("Position Y [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lpy = value
+end)
+
+rl:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.pz = value
+end)
+
+rl:Slider("Position Z [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lpz = value
+end)
+
+rl:Label("Rotation",{
+    TextSize = 15; -- Self Exprlining
+    TextColor = Color3.fromRGB(colorR,colorG,colorB); -- Self Exprlining
+    BgColor = Color3.fromRGB(20,20,20); -- Self Exprlining
+}) 
+
+
+rl:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.rx = value
+end)
+
+rl:Slider("Rotation X [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lrx = value
+end)
+
+rl:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.ry = value
+end)
+
+rl:Slider("Rotation Y [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lry = value
+end)
+
+rl:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.rz = value
+end)
+
+rl:Slider("Rotation Z [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    rleglerp.lrz = value
+end)
+
+ll:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.px = value
+end)
+
+ll:Slider("Position X [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lpx = value
+end)
+
+ll:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.py = value
+end)
+
+ll:Slider("Position Y [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lpy = value
+end)
+
+ll:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.pz = value
+end)
+
+ll:Slider("Position Z [L]",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lpz = value
+end)
+
+ll:Label("Rotation",{
+    TextSize = 15; -- Self Expllining
+    TextColor = Color3.fromRGB(colorR,colorG,colorB); -- Self Expllining
+    BgColor = Color3.fromRGB(20,20,20); -- Self Expllining
+}) 
+
+
+ll:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.rx = value
+end)
+
+ll:Slider("Rotation X [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lrx = value
+end)
+
+ll:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.ry = value
+end)
+
+ll:Slider("Rotation Y [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lry = value
+end)
+
+ll:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.rz = value
+end)
+
+ll:Slider("Rotation Z [L]",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    lleglerp.lrz = value
+end)
+
+m:Slider("Animation Speed",{
+    min = 0; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    aspeed = value
+end)
+
+HumanoidPlr = game.Players.LocalPlayer.Character.Humanoid
+local conne = {}
+
+HumanoidPlr.Died:connect(function()
+_G.reanimatednow = false
+end)
+
+end
+
+
+
+function check()
+if 1==1 then
+n('Xen Animator','Checking Whitelist...')
+n('Xen Animator','Whitelist found!')
+n('Xen Animator','Welcome '..game.Players.LocalPlayer.DisplayName..' (aka) '..game.Players.LocalPlayer.Name..'\nThanks for buying Xen Imator.')
+animator()
+else
+n('Xen Animator','Checking Whitelist...')
+n('Xen Animator','No whitelist found. :(')
+n('Xen Animator','Please DM one of our mods in Discord.')
+end
+end
+
+check()
