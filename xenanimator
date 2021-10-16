@@ -1,0 +1,487 @@
+game["Run Service"].RenderStepped:connect(function()
+   settings().Physics.AllowSleep = false
+   setsimulationradius(math.huge*math.huge,math.huge*math.huge)
+end)
+
+colorR = 255
+colorG = 50
+colorB = 120
+
+_G.MainTextColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.PointerColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ButtonTextColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ButtonColor = Color3.fromRGB(0,0,0)
+_G.SliderColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.DraggerCircleColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ToggleColor = Color3.fromRGB(colorR,colorG,colorB)
+_G.ArrowColor = Color3.fromRGB(colorR,colorG,colorB)
+
+local LocalPlayer = game.Players.LocalPlayer
+local Character = game.Players.LocalPlayer
+local Humanoid = LocalPlayer.Character.Humanoid
+
+noclip = false
+
+function notify(title, text)
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = title;Text = text;})
+end
+
+function noclip()
+if noclip == true then
+for i,v in next, workspace[game.Players.LocalPlayer.Name]:GetDescendants() do
+if v:IsA("BasePart") and v.CanCollide == true then
+v.CanCollide = false
+end
+end
+end
+end
+
+nocliploop = game:GetService('RunService').Stepped:Connect(noclip)
+
+function Edit(HatName, position, rotation, part)
+    game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment.Rotation = rotation
+    game:GetService("Workspace")[LocalPlayer.Name][part][HatName].Position = position
+end
+
+function rmesh(HatName)
+for _,mesh in next, workspace[LocalPlayer.Name][HatName]:GetDescendants() do
+if mesh:IsA("Mesh") or mesh:IsA("SpecialMesh") then
+mesh:Remove()
+end
+end
+end
+
+function info(HatName)
+print("Hat:", workspace[LocalPlayer.Name][HatName].Name)
+print("Size:", workspace[LocalPlayer.Name][HatName].Handle.Size)
+if workspace[game.Players.LocalPlayer.Name][HatName].Handle.CanCollide then
+print("Can Collide: true")
+else
+print("Can Collide: false")
+end
+end
+
+function Create(HatName, position, rotation, part)
+Instance.new("Attachment",game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("AlignPosition",game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("AlignOrientation", game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("Attachment",game:GetService("Workspace")[LocalPlayer.Name][part])
+workspace[LocalPlayer.Name][part].Attachment.Name = HatName
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AccessoryWeld:Destroy()
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Attachment0 = game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Attachment0 = game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Attachment1 = game:GetService("Workspace")[LocalPlayer.Name][part][HatName]
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Attachment1 = game:GetService("Workspace")[LocalPlayer.Name][part][HatName]
+game:GetService("Workspace")[LocalPlayer.Name][part][HatName].Position = position
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment.Rotation = rotation
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Responsiveness = 200
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Responsiveness = 200
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.RigidityEnabled = true
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.RigidityEnabled = true
+end
+
+hate = ""
+parte = ""
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("Xen's Hat Scripter") -- Creates the window
+
+local b = w:CreateFolder("Main")
+local z = w:CreateFolder("Position")
+local r = w:CreateFolder("Rotation")
+local cpy = w:CreateFolder("Copy Stuff")
+local set = w:CreateFolder("Set Create")
+local sedit = w:CreateFolder("Set Edit")
+local setting = w:CreateFolder("Settings")
+
+mode = "Create"
+
+b:Box("Hat:","string",function(hat) -- "number" or "string"
+    hate = hat
+end)
+
+b:Box("Part:","string",function(p) -- "number" or "string"
+    parte = p
+end)
+
+b:Dropdown("Create",{"Create","Edit"},true,function(e)
+    mode = e
+    if mode == "Create" then
+    print("Create Mode")
+    else
+    print("Edit Mode")
+    end
+end)
+
+px = 0
+py = 0
+pz = 0
+rx = 0
+ry = 0
+rz = 0
+
+z:Slider("Position X",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(ppx)
+    px = ppx
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+z:Slider("Position Y",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(ppy)
+    py = ppy
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+z:Slider("Position Z",{
+    min = -90; -- min value of the slider
+    max = 90; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(ppz)
+    pz = ppz
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+r:Slider("Rotation X",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(rrx)
+    rx = rrx
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+r:Slider("Rotation Y",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(rry)
+    ry = rry
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+r:Slider("Rotation Z",{
+    min = -180; -- min value of the slider
+    max = 180; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(rrz)
+    rz = rrz
+
+    Edit(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+b:Button("Check Hats",function()
+for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+if v:IsA("Accessory") then
+print(v)
+end
+end
+end)
+
+b:Button("Hat Info (Print)",function()
+info(hate)
+notify("Xen's Hat Scripter","Press F9 to see info")
+end)
+
+b:Button("Netless",function()
+for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+game:GetService("RunService").Heartbeat:connect(function()
+v.Velocity = Vector3.new(0,-30,0)
+wait(0.5)
+end)
+end
+end
+notify("Xen's Hat Scripter","Netless Runned.")
+end)
+
+b:Button("Remove Mesh",function()
+rmesh(hate)
+end)
+
+b:Button("Debug",function()
+    Create(hate,Vector3.new(px,py,pz),Vector3.new(rx,ry,rz),parte)
+end)
+
+functions = [[
+for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+game:GetService("RunService").Heartbeat:connect(function()
+v.Velocity = Vector3.new(0,-30,0)
+wait(0.5)
+end)
+end
+end
+
+local LocalPlayer = game.Players.LocalPlayer
+
+function Create(HatName, position, rotation, part)
+Instance.new("Attachment",game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("AlignPosition",game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("AlignOrientation", game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle)
+Instance.new("Attachment",game:GetService("Workspace")[LocalPlayer.Name][part])
+workspace[LocalPlayer.Name][part].Attachment.Name = HatName
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AccessoryWeld:Destroy()
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Attachment0 = game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Attachment0 = game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Attachment1 = game:GetService("Workspace")[LocalPlayer.Name][part][HatName]
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Attachment1 = game:GetService("Workspace")[LocalPlayer.Name][part][HatName]
+game:GetService("Workspace")[LocalPlayer.Name][part][HatName].Position = position
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment.Rotation = rotation
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.Responsiveness = 200
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.Responsiveness = 200
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignPosition.RigidityEnabled = true
+game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.AlignOrientation.RigidityEnabled = true
+end
+
+function Edit(HatName, position, rotation, part)
+    game:GetService("Workspace")[LocalPlayer.Name][HatName].Handle.Attachment.Rotation = rotation
+    game:GetService("Workspace")[LocalPlayer.Name][part][HatName].Position = position
+end
+
+function rmesh(HatName)
+for _,mesh in next, workspace[LocalPlayer.Name][HatName]:GetDescendants() do
+if mesh:IsA("Mesh") or mesh:IsA("SpecialMesh") then
+mesh:Remove()
+end
+end
+end
+
+]]
+
+cpy:Button("Copy Functions",function()
+setclipboard(functions)
+notify("Xen's Hat Scripter","Copied to Clipboard")
+end)
+
+cpy:Button("Copy Create",function()
+if mode == "Create" then
+setclipboard("Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')")
+notify("Xen's Hat Scripter","Copied to Clipboard")
+end
+end)
+
+cpy:Button("Copy Edit",function()
+if mode == "Edit" then
+setclipboard("Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')")
+notify("Xen's Hat Scripter","Copied to Clipboard")
+end
+end)
+cpy:Button("Copy Remove Mesh",function()
+setclipboard("rmesh('"..hate.."')")
+notify("Xen's Hat Scripter","Copied to Clipboard")
+end)
+
+sc1=''
+sc2=''
+sc3=''
+sc4=''
+sc5=''
+sc6=''
+sc7=''
+sc8=''
+sc9=''
+sc10=''
+
+se1=''
+se2=''
+se3=''
+se4=''
+se5=''
+se6=''
+se7=''
+se8=''
+se9=''
+se10=''
+
+set:Button("Set Create 1",function()
+if mode == "Create" then
+sc1 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 2",function()
+if mode == "Create" then
+sc2 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 3",function()
+if mode == "Create" then
+sc3 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 4",function()
+if mode == "Create" then
+sc4 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 5",function()
+if mode == "Create" then
+sc5 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 6",function()
+if mode == "Create" then
+sc6 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 7",function()
+if mode == "Create" then
+sc7 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 8",function()
+if mode == "Create" then
+sc8 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 9",function()
+if mode == "Create" then
+sc9 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+set:Button("Set Create 10",function()
+if mode == "Create" then
+sc10 = "Create('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Create.")
+end
+end)
+
+sedit:Button("Set Edit 1",function()
+if mode == "Edit" then
+se1 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 2",function()
+if mode == "Edit" then
+se2 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 3",function()
+if mode == "Edit" then
+se3 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 4",function()
+if mode == "Edit" then
+se4 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 5",function()
+if mode == "Edit" then
+se5 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 6",function()
+if mode == "Edit" then
+se6 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 7",function()
+if mode == "Edit" then
+se7 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 8",function()
+if mode == "Edit" then
+se8 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 9",function()
+if mode == "Edit" then
+se9 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+sedit:Button("Set Edit 10",function()
+if mode == "Edit" then
+se10 = "Edit('"..hate.."',Vector3.new("..px..","..py..","..pz.."),Vector3.new("..rx..","..ry..","..rz.."),'"..parte.."')"
+notify("Xen's Hat Scripter","Setted Edit.")
+end
+end)
+
+cpy:Button("Copy All Create",function()
+if mode == "Create" then
+setclipboard(""..sc1.."\n"..sc2.."\n"..sc3.."\n"..sc4.."\n"..sc5.."\n"..sc6.."\n"..sc7.."\n"..sc8.."\n"..sc9.."\n"..sc10.."")
+end
+end)
+
+cpy:Button("Copy All Edit",function()
+if mode == "Edit" then
+setclipboard(""..se1.."\n"..se2.."\n"..se3.."\n"..se4.."\n"..se5.."\n"..se6.."\n"..se7.."\n"..se8.."\n"..se9.."\n"..se10.."")
+end
+end)
+
+cpy:Button("Copy All Script",function()
+setclipboard(""..functions..""..sc1.."\n"..sc2.."\n"..sc3.."\n"..sc4.."\n"..sc5.."\n"..sc6.."\n"..sc7.."\n"..sc8.."\n"..sc9.."\n"..sc10.."")
+end)
+
+setting:Toggle("Anti Fling",function(toggle)
+    if toggle then
+    noclip = true
+    else
+    noclip = false
+    end
+end)
+
+setting:Button("How to use?",function()
+print([[
+
+---------------------------------------------------------------------------------
+1. Set the positions and rotations to 0 before anything
+2. Enter the hat name in the text box "Hat Name"
+3. Enter the part that where u want to attach the hats (only ur body parts)
+4. Now edit the positions and rotations whatever u want
+5. You can save the hat positions and rotations by setting create or setting edit
+6. Before u copy the script make sure that u change the mode to create or edit
+7. U can enable or disable anti fling from skids in settings
+---------------------------------------------------------------------------------
+
+]])
+notify("Xen's Hat Scripter",[[Press F9 to see info.]])
+end)
